@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>Zero - 折染</title>
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        min-width: 450px;
+      }
+      #root {
+        margin: 20px 15px;
+      }
+      #chessboard {
+        display: inline-flex;
+        flex-direction: row;
+      }
+      .cell_column {
+        display: inline-flex;
+        flex-direction: column;
+      }
+      .cell{
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        border: 1px rgb(114, 112, 112) solid;
+      }
+      #boxRow {
+        display: flex;
+        flex-direction: row;
+      }
+      .foldTextBox {
+        background-color: #ffffff;
+      }
+      #columnRight{
+        display: flex;
+        flex-direction: column;
+      }
+      #rowBox {
+        margin: 0 auto;
+        width: 176px;
+        display: flex;
+        flex-direction: row;
+      }
+      #columnFoldTextBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      #rowFoldTextBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      #dialogBoxBackground {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+      }
+      #dialogBox {
+        background-color: white;
+        width: 280px;
+        height: 320px;
+        z-index: 99;
+        opacity: 1;
+        border-radius: 10px;
+      }
+      #buttonBox {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+      }
+      .buttonClass {
+        font-size: 15px;
+        display: inline;
+      }
+    </style>
+  </head>
+  <body style="background-color: #FFE411;">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="dialogBoxBackground">
+      <div id="dialogBox">
+        <h3 id="comeonBox" style="text-align: center; padding: 10px;"></h3>
+        <button id="dialogBoxButton" class="buttonClass" onclick="next()" style="display: block;margin: 200px auto;"></button>
+      </div>
+    </div>
+    <div id="root">
+      <h1 style="text-align: center;">Zero - 折染</h1>
+      <p>折染是一个以折叠和染色为核心的游戏（下面用数值表示颜色深浅，数值越大颜色越深 0 为无色）。折是指以画纸的某一条轴对折，重叠了两个方格按照如下方式重新染色：当两个方格原本都没有颜色，则折叠后两个方格依然没有颜色；其他的情况，两个方格的颜色总和，如果超过阈值则减去阈值；如果不超过阈值则为之前所求的和，特别地，两个方格颜色是阈值，则颜色变成最浅。目前默认阈值是4。<br />
+        如：重叠两个方格，颜色分别是 0 和 0，染色后依然是 0；重叠两个方格，颜色分别是 4 和 4 则，染色后都是 1；重叠两个方格，颜色分别是 1 和 2，染色后都是 3（1+2）；重叠两个方格，颜色分别是 2 和 3，染色后颜色都是1（2 + 3 - 4）。<br />
+        通关条件：当<span style="color: red;">红色</span>标记的方格的颜色染成对应值时，则通关。<br />
+        共有 64 个方格，每一个方格有 4 个着色方案，有 4 关，暗含 1024（64 * 4 * 4）。</p>
+      <div id="rowBox">
+        <div>
+          <div id="chessboard">
+            <div>图形渲染中......</div>
+          </div>
+          <div id="rowFoldTextBox">
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [1, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [2, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [3, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [4, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [5, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [6, 0])"
+            >折</div>
+            <div
+              class="foldTextBox cell"
+              onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [7, 0])"
+            >折</div>
+          </div>
+        </div>
+        <div id="columnRight">
+          <div class="cell" style="border: none;height: 15px;"></div>
+          <div
+            class="foldTextBox cell" 
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 1])"
+          >折</div>
+          <div
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 2])"
+          >折</div>
+          <div 
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 3])"
+          >折</div>
+          <div
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 4])"
+          >折</div>
+          <div
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 5])"
+          >折</div>
+          <div
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 6])"
+          >折</div>
+          <div
+            class="foldTextBox cell"
+            onclick="thisfold(lastFiveStep[lastFiveStep.length - 1], [0, 7])"
+          >折</div>
+        </div>
+      </div>
+      <div id="buttonBox">
+        <button class="buttonClass" onclick="back()">后退</button>
+        <button class="buttonClass" onclick="Restart()">重新开始</button>
+      </div>
+    </div>
+  </body>
+  <script src="./src/render.js"></script>
+  <script src="./src/constant.js"></script>
+  <script src="./src/fold.js"></script>
+  <script src="./src/html2canvas.min.js"></script>
+  <script>
+    //localStorage.setItem("checkpointNow", 2);
+    //localStorage.setItem("checkpointNow", checkpointNow);
+    //localStorage.getItem("checkpointNow");
+
+
+    // 初始化关卡
+    let checkpointNow = localStorage.getItem("checkpointNow") ? Number(localStorage.getItem("checkpointNow")) : 0;
+
+    // 初始化步幅记录（最后 5 步）
+    let lastFiveStep = [];
+
+    // 更新步幅
+    function pushLastFiveStep(arr){
+      if(lastFiveStep.length >= 6){
+        lastFiveStep.shift();
+        lastFiveStep.push(arr);
+      } else {
+        lastFiveStep.push(arr);
+      }
+    }
+
+    // 后退步幅
+    function popLastFiveStep(){
+      if(lastFiveStep.length <= 1){
+      } else {
+        lastFiveStep.pop();
+      }
+    }
+
+    // 获取渲染位置
+    let chessboardBox = document.getElementById("chessboard");
+
+    function thisRender(round){
+      chessboardBox.innerHTML = rederRow(round);
+      checks[checkpointNow].map(items => {
+        const {coordinate, value} = items;
+        const answerCell = document.getElementById(`cell-${coordinate[0]}-${coordinate[1]}`);
+        answerCell.style.color = "red";
+        answerCell.innerText = value;
+      })
+    }
+
+    // 将当前关卡初始数据存储、渲染
+    pushLastFiveStep(rounds[checkpointNow]);
+    thisRender(lastFiveStep[lastFiveStep.length - 1]);
+
+    // 折
+    function thisfold(arrs, axis){
+      let thisstep = fold(arrs, axis);
+      if (isWin(thisstep, checks[checkpointNow])) {
+        pushLastFiveStep(thisstep);
+        thisRender(lastFiveStep[lastFiveStep.length - 1]);
+        openDialogBox();
+      } else {
+        pushLastFiveStep(thisstep);
+        thisRender(lastFiveStep[lastFiveStep.length - 1]);
+      }
+    }
+
+    // 后退
+    function back(){
+      popLastFiveStep();
+      thisRender(lastFiveStep[lastFiveStep.length - 1]);
+    }
+
+    // 重新开始
+    function Restart(){
+      pushLastFiveStep(rounds[checkpointNow]);
+      thisRender(lastFiveStep[lastFiveStep.length - 1]);
+    }
+
+    function openDialogBox(){
+      document.getElementById("comeonBox").innerText = checkpointNow >= 3 ? "您已经通关了！": `您已经通过第 ${checkpointNow + 1} 关`;
+      let button = document.getElementById("dialogBoxButton");
+      button.innerText = checkpointNow >= 3 ? "关闭" : "下一关";
+      document.getElementById('dialogBoxBackground').style.display = "flex";
+    }
+
+    function closeDialogBox(){
+      document.getElementById('dialogBoxBackground').style.display = "none";
+    }
+
+    // 下一关
+    function next(){
+      if(checkpointNow < 3) {
+        checkpointNow++
+        localStorage.setItem("checkpointNow", checkpointNow);
+      } else {
+        checkpointNow = 0;
+        localStorage.setItem("checkpointNow", checkpointNow);
+      }
+      lastFiveStep = [];
+      // 将当前关卡初始数据存储、渲染
+      pushLastFiveStep(rounds[checkpointNow]);
+      thisRender(lastFiveStep[lastFiveStep.length - 1]);
+      closeDialogBox();
+    }
+  </script>
+</html>

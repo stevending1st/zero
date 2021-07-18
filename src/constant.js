@@ -1,17 +1,15 @@
-const { fold } = require("./fold");
+// 每一边的长度
+const cellNum = 8;
 
-let test = [
-  [1, 2, 3, 4, 4, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [4, 3, 2, 1, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 2, 3, 4, 0, 0, 0, 0],
-];
+// 颜色
+// const colorList = ["#91d5ff", "#69c0ff", "#40a9ff", "#1890ff", "#096dd9", "#0050b3", "#003a8c", "#002766"];
+const colorList = ["#f0f0f0", "#d9d9d9", "#bfbfbf", "#595959"];
 
-let test1 = [
+// 颜色总数
+const colorNum = colorList.length;
+
+// 第一关
+const round1 = [
   [0, 0, 0, 3, 0, 0, 0, 0],
   [0, 0, 3, 0, 0, 0, 0, 0],
   [0, 3, 3, 3, 0, 0, 0, 0],
@@ -21,11 +19,15 @@ let test1 = [
   [0, 0, 0, 0, 0, 0, 3, 0],
   [0, 0, 0, 0, 0, 0, 0, 3],
 ];
-// [6,2] 3
+const check1 = [
+  {
+    coordinate: [6,2],
+    value: 3,
+  }
+]
 
-
-
-let test2 = [
+// 第二关
+const round2 = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 2, 0, 0, 0, 0, 0],
   [0, 0, 2, 3, 0, 0, 2, 3],
@@ -35,9 +37,15 @@ let test2 = [
   [3, 2, 0, 0, 3, 0, 0, 0],
   [0, 0, 3, 0, 0, 0, 3, 0],
 ];
-// [0, 5] 3
+const check2 = [
+  {
+    coordinate: [0, 5],
+    value: 3,
+  }
+];
 
-let test3 = [
+// 第三关
+const round3 = [
   [0, 0, 0, 4, 3, 0, 0, 0],
   [0, 0, 4, 0, 0, 3, 0, 0],
   [0, 4, 0, 0, 0, 0, 3, 0],
@@ -47,9 +55,15 @@ let test3 = [
   [0, 0, 4, 2, 3, 0, 0, 0],
   [0, 0, 0, 4, 0, 0, 0, 0],
 ];
-// [6, 6] 3
+const check3 = [
+  {
+    coordinate: [5, 6],
+    value: 3,
+  }
+]
 
-let test4 = [
+// 第四关
+const round4 = [
   [0, 0, 0, 0, 0, 0, 0, 3],
   [0, 0, 0, 3, 0, 0, 0, 0],
   [3, 0, 0, 0, 0, 3, 0, 0],
@@ -59,8 +73,20 @@ let test4 = [
   [3, 0, 0, 0, 0, 0, 3, 0],
   [0, 0, 0, 3, 0, 0, 0, 0],
 ];
+const check4 = [
+  {
+    coordinate: [5, 5],
+    value: 3,
+  }
+]
 
-// [5, 5] 3
+const rounds = [round1, round2, round3, round4,];
+const checks = [check1, check2, check3, check4,];
 
-console.log(fold(test, [6, 0]));
-
+// export default {
+//   cellNum,
+//   colorList,
+//   colorNum,
+//   rounds,
+//   checks,
+// }
