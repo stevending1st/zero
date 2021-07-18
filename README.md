@@ -1,70 +1,15 @@
-# Getting Started with Create React App
+# Zero - 折染
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![GitHub Repo stars](https://img.shields.io/github/stars/stevending1st/zero?style=social)  ![GitHub](https://img.shields.io/github/license/stevending1st/zero)  ![GitHub last commit](https://img.shields.io/github/last-commit/stevending1st/zero)
 
-## Available Scripts
+[Zero - 折染](https://stevending1st.github.io/zero/) 是一个以折叠和染色为核心的游戏。
 
-In the project directory, you can run:
+## 玩法
 
-### `npm start`
+折染是一个以折叠和染色为核心的游戏（下面用数值表示颜色深浅，数值越大颜色越深 0 为无色）。折是指以画纸的某一条轴对折，重叠了两个方格按照如下方式重新染色：当两个方格原本都没有颜色，则折叠后两个方格依然没有颜色；其他的情况，两个方格的颜色总和，如果超过阈值则减去阈值；如果不超过阈值则为之前所求的和，特别地，两个方格颜色是阈值，则颜色变成最浅。目前默认阈值是4。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+如：重叠两个方格，颜色分别是 0 和 0，染色后依然是 0；重叠两个方格，颜色分别是 4 和 4 则，染色后都是 1；重叠两个方格，颜色分别是 1 和 2，染色后都是 3（1+2）；重叠两个方格，颜色分别是 2 和 3，染色后颜色都是1（2 + 3 - 4）。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+通关条件：当<span style="color: red;">红色</span>标记的方格的颜色染成对应值时，则通关。
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+共有 64 个方格，每一个方格有 4 个着色方案，有 4 关，暗含 1024（64 * 4 * 4）。
