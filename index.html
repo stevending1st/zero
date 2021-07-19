@@ -76,11 +76,15 @@
       }
       #dialogBox {
         background-color: white;
-        width: 280px;
-        height: 320px;
+        width: 20rem;
+        height: 25rem;
         z-index: 99;
         opacity: 1;
         border-radius: 10px;
+      }
+      #dialogBoxButton {
+        display: block;
+        margin: 0.5rem auto;
       }
       #buttonBox {
         margin: 1rem auto;
@@ -99,8 +103,8 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="dialogBoxBackground">
       <div id="dialogBox">
-        <h3 id="comeonBox" style="text-align: center; padding: 10px;"></h3>
-        <button id="dialogBoxButton" class="buttonClass" onclick="next()" style="display: block;margin: 200px auto;"></button>
+        <h3 id="comeonBox" style="text-align: center; padding: 0.5rem;"></h3>
+        <button id="dialogBoxButton" class="buttonClass" onclick="next()" ></button>
       </div>
     </div>
     <div id="root">
