@@ -398,7 +398,24 @@
 
     function takeScreenshot() {
       console.log('test');
-      new html2canvas(document.getElementById('chessboard'))
+      let chessboard = document.getElementById('chessboard');
+      chessboard.style.border = "1px solid #333";
+      let chessboardList = chessboard.childNodes;
+      console.log(chessboardList);
+      // chessboardList.map((items,index) => {
+      //   console.log("index:", index, ",items:", items)
+      // });
+      for(let i = 0; i < chessboardList.length; i++){
+        console.log("index:", i, ",items:", chessboardList[i])
+        chessboardList[i].style.border = "none";
+        let cCCNode = chessboardList[i].childNodes;
+        for(let j = 0; j < cCCNode.length; j++){
+          cCCNode[j].style.border = "none";
+          cCCNode[j].innerText = "";
+        }
+      }
+      // console.log(chessboard);
+      new html2canvas(chessboard)
         .then(canvas => {
           let oImg = new Image();
           oImg.style.width = "16rem";

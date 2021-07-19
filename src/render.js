@@ -29,8 +29,14 @@ function rederRow(rowValue) {
   return returnCode
 }
 
-function rederModel(){
-  
-}
+// function rederOutImg(Img){
+//   let returnCode = ``;
+//   Img.map((cloumnItem, cloumnIndex) => {
+//     returnCode = `<div class="cell_column">`
+//     cloumnItem.map((rowItem, rowIndex) => {
+
+//     })
+//   })
+// }
 
 
