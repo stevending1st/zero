@@ -148,7 +148,7 @@
       <div id="dialogBox">
         <h3 id="comeonBox" style="text-align: center; padding: 0.5rem;"></h3>
         <div id="outImg"></div>
-        <p style="text-align: center;">长按保存图片</p>
+        <p style="text-align: center; color: #999;">长按保存图片</p>
         <button id="dialogBoxButton" class="buttonClass" onclick="next()" ></button>
       </div>
     </div>
@@ -401,6 +401,8 @@
       new html2canvas(document.getElementById('chessboard'))
         .then(canvas => {
           let oImg = new Image();
+          oImg.style.width = "16rem";
+          oImg.style.height = "16rem";
           oImg.src = canvas.toDataURL(); 
           let outImg = document.getElementById("outImg");
           outImg.innerHTML = '';
