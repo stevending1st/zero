@@ -1,0 +1,132 @@
+.lineCenter {
+  text-align: center;
+}
+* {
+  margin: 0;
+}
+body {
+  min-width: 450px;
+}
+#menu {
+  position: fixed;
+  height: 3rem;
+  background: #000;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+}
+#menu > button {
+  border: 0;
+  background: #000000;
+  color: #FFE411;
+  font-size: 1rem;
+}
+#root,
+#rule,
+#about {
+  margin: 4rem 15px 20px 15px;
+}
+#root {
+  display: block;
+}
+#rule,
+#about {
+  display: none;
+}
+#chessboard {
+  display: inline-flex;
+  flex-direction: row;
+}
+.cell_column {
+  display: inline-flex;
+  flex-direction: column;
+}
+.cell{
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border: 1px rgb(114, 112, 112) solid;
+  user-select: none;
+}
+#boxRow {
+  display: flex;
+  flex-direction: row;
+}
+.foldTextBox {
+  background-color: #ffffff;
+}
+#columnRight{
+  display: flex;
+  flex-direction: column;
+}
+#rowBox {
+  margin: 1rem auto;
+  width: 18rem;
+  display: flex;
+  flex-direction: row;
+}
+#columnFoldTextBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#rowFoldTextBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#dialogBoxBackground {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  top: 0px;
+}
+#dialogBox {
+  background-color: white;
+  width: 20rem;
+  height: 25rem;
+  z-index: 99;
+  opacity: 1;
+  border-radius: 10px;
+}
+#dialogBoxButton {
+  display: block;
+  margin: 0.5rem auto;
+}
+#buttonBox {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+}
+.buttonClass {
+  font-size: 1rem;
+  margin: 0 5px;
+  display: inline;
+  user-select: none;
+}
+#ruleBox {
+  margin: 0 auto;
+  width: 12rem;
+}
+.ruleRow {
+  display: flex;
+}
+#ruleTable {
+  display: flex;
+}
+#about > h2,
+#about > h3,
+#about > p {
+  margin: 20px;
+}
+#outImg {
+  display: flex;
+  justify-content: center;
+}
