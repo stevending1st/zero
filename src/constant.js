@@ -83,6 +83,16 @@ const check4 = [
 const rounds = [round1, round2, round3, round4,];
 const checks = [check1, check2, check3, check4,];
 
+// roundlearn
+const roundlearn = [
+  [0, 1, 2, 3, 4],
+  [1, 2, 3, 4, 1],
+  [2, 3, 4, 1, 2],
+  [3, 4, 1, 2, 3],
+  [4, 1, 2, 3, 1],
+];
+
+
 // export default {
 //   cellNum,
 //   colorList,
